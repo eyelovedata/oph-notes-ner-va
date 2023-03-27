@@ -1,0 +1,56 @@
+#prodigy code examples for va 
+
+#prodigy code - custom manual ner task that reads in the pre-tokenized and prelabeled data 
+#have to redo this first one because I accidentally dropped it from the database 
+python -m prodigy custom_ner distilbert -F prodigycustom.py prodigyfiles/distilbert-predictions.jsonl
+python -m prodigy custom_ner distilbert-corrected -F prodigycustom.py prodigyfiles/distilbert-predictions.jsonl
+
+python -m prodigy custom_ner distilbert-true -F prodigycustom.py prodigyfiles/distilbert-groundtruthlabels.jsonl
+python -m prodigy custom_ner distilbert-true-corrected -F prodigycustom.py prodigyfiles/distilbert-groundtruthlabels.jsonl
+
+
+python -m prodigy custom_ner biobert -F prodigycustom.py prodigyfiles/biobert-predictions.jsonl
+python -m prodigy custom_ner biobert-corrected -F prodigycustom.py prodigyfiles/biobert-predictions.jsonl
+
+python -m prodigy custom_ner biobert-true -F prodigycustom.py prodigyfiles/biobert-groundtruthlabels.jsonl
+python -m prodigy custom_ner biobert-true-corrected -F prodigycustom.py prodigyfiles/biobert-groundtruthlabels.jsonl
+
+
+python -m prodigy custom_ner clinicalbert -F prodigycustom.py prodigyfiles/clinicalbert-predictions.jsonl
+python -m prodigy custom_ner clinicalbert-corrected -F prodigycustom.py prodigyfiles/clinicalbert-predictions.jsonl
+
+python -m prodigy custom_ner clinicalbert-true -F prodigycustom.py prodigyfiles/clinicalbert-groundtruthlabels.jsonl
+python -m prodigy custom_ner clinicalbert-true-corrected -F prodigycustom.py prodigyfiles/clinicalbert-groundtruthlabels.jsonl
+
+
+
+#prodigy code exporting annotation results to a jsonl from the database 
+python -m prodigy db-out distilbert > prodigyfiles/output/distilbert-predictions-orig.jsonl
+python -m prodigy db-out distilbert-corrected > prodigyfiles/output/distilbert-predictions-corrected.jsonl
+
+python -m prodigy db-out distilbert-true > prodigyfiles/output/distilbert-true-orig.jsonl
+python -m prodigy db-out distilbert-true-corrected > prodigyfiles/output/distilbert-true-corrected.jsonl
+
+
+python -m prodigy db-out biobert > prodigyfiles/output/biobert-predictions-orig.jsonl
+python -m prodigy db-out biobert-corrected > prodigyfiles/output/biobert-predictions-corrected.jsonl
+
+python -m prodigy db-out biobert-true > prodigyfiles/output/biobert-true-orig.jsonl
+python -m prodigy db-out biobert-true-corrected > prodigyfiles/output/biobert-true-corrected.jsonl
+
+python -m prodigy db-out clinicalbert > prodigyfiles/output/clinicalbert-predictions-orig.jsonl
+python -m prodigy db-out clinicalbert-corrected > prodigyfiles/output/clinicalbert-predictions-corrected.jsonl
+
+python -m prodigy db-out clinicalbert-true > prodigyfiles/output/clinicalbert-true-orig.jsonl
+python -m prodigy db-out clinicalbert-true-corrected > prodigyfiles/output/clinicalbert-true-corrected.jsonl
+
+
+python -m prodigy db-out groundtruth > groundtruthcorrected.jsonl
+
+
+#prodigy remove testdata from the database to start over 
+python -m prodigy drop testdata
+python -m prodigy drop biobert-sle-outset
+
+
+
